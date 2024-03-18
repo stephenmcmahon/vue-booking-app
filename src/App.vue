@@ -10,20 +10,31 @@
     phone: ''
   })
 
+  const dateData = ref({ 
+    date: ''
+  })
+
   const handleFormSubmitted = (data) => {
     infoData.value = data
     infoSubmitted.value = true
+  }
+
+  const handleDateSelected = (data) => {
+    dateData.value = data
   }
 </script>
 
 <template>
   <div>
     <Info @formSubmitted="handleFormSubmitted" />
-    <Calendar v-if="infoSubmitted" />
+    <div v-if="infoSubmitted">
+      <Calendar @dateSelected="handleDateSelected" />
+    </div>
     <div v-if="infoSubmitted">
       <p>Name: {{ infoData.name }}</p>
       <p>Email: {{ infoData.email }}</p>
       <p>Phone: {{ infoData.phone }}</p>
+      <p>Date: {{ dateData.date }}</p>
     </div>
   </div>
 </template>
