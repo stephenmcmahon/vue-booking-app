@@ -3,7 +3,8 @@
 
   const formData = ref({ 
     name: '', 
-    email: '' 
+    email: '',
+    phone: ''
   })
 
   const emits = defineEmits(['formSubmitted'])

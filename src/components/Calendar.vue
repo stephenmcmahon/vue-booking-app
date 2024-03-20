@@ -1,14 +1,14 @@
 <script setup>
   import { ref, defineEmits } from 'vue'
   const date = ref()
-  const setDate = (value) => {
-    date.value = value
-    emits('dateSelected', date.value)
-  }
-  const startTime = ref({ hours: 9, minutes: 0 })
 
   const emits = defineEmits(['dateSelected'])
 
+  const setDate = (value) => {
+    date.value = value
+    emits('dateSelected', date)
+  }
+  const startTime = ref({ hours: 9, minutes: 0 })
 </script>
 
 <template>

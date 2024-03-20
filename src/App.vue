@@ -4,6 +4,8 @@
   import { ref } from 'vue'
 
   const infoSubmitted = ref(false)
+  const dateSubmitted = ref(false)
+
   const infoData = ref({ 
     name: '', 
     email: '',
@@ -19,22 +21,26 @@
     infoSubmitted.value = true
   }
 
-  const handleDateSelected = (data) => {
+  const handleDateSubmitted = (data) => {
     dateData.value = data
+    dateSubmitted.value = true
   }
+
 </script>
 
 <template>
   <div>
     <Info @formSubmitted="handleFormSubmitted" />
     <div v-if="infoSubmitted">
-      <Calendar @dateSelected="handleDateSelected" />
-    </div>
-    <div v-if="infoSubmitted">
+      <Calendar @dateSelected="handleDateSubmitted" />
       <p>Name: {{ infoData.name }}</p>
       <p>Email: {{ infoData.email }}</p>
       <p>Phone: {{ infoData.phone }}</p>
-      <p>Date: {{ dateData.date }}</p>
+    </div>
+    <div v-if="dateSubmitted">
+      <p>Date Selected: {{ dateData.value }}</p>
+
+      <button>Confirm Info and Date</button>
     </div>
   </div>
 </template>
