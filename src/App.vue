@@ -1,10 +1,12 @@
 <script setup>
   import Info from './components/Info.vue'
   import Calendar from './components/Calendar.vue'
+  import Message from './components/Message.vue'
   import { ref } from 'vue'
 
   const infoSubmitted = ref(false)
   const dateSubmitted = ref(false)
+  const infoConfirmed = ref(false)
 
   const infoData = ref({ 
     name: '', 
@@ -26,6 +28,9 @@
     dateSubmitted.value = true
   }
 
+  const handleConfirm = () => {
+    infoConfirmed.value = true
+  }
 </script>
 
 <template>
@@ -39,8 +44,10 @@
     </div>
     <div v-if="dateSubmitted">
       <p>Date Selected: {{ dateData.value }}</p>
-
-      <button>Confirm Info and Date</button>
+      <button @click="handleConfirm">Confirm Info and Date</button>
+    </div>
+    <div v-if="infoConfirmed">
+      <Message />
     </div>
   </div>
 </template>

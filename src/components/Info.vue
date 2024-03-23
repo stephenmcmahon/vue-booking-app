@@ -1,6 +1,6 @@
 <script setup>
   import { ref, defineEmits } from 'vue'
-
+  const infoSubmitted = ref(false)
   const formData = ref({ 
     name: '', 
     email: '',
@@ -10,23 +10,46 @@
   const emits = defineEmits(['formSubmitted'])
 
   const handleSubmit = () => {
+    const fieldName = document.forms['infoForm']['name'].value
+    const fieldEmail = document.forms['infoForm']['email'].value
+    const fieldPhone = document.forms['infoForm']['phone'].value
+    if (fieldName == '' || fieldName == null) {
+      alert('Name must be filled out')
+      return false
+    }
+    if (fieldEmail == '' || fieldEmail == null) {
+      alert('Email must be filled out')
+      return false
+    }
+    if (fieldPhone == '' || fieldPhone == null) {
+      alert('Phone must be filled out')
+      return false
+    }
     emits('formSubmitted', formData.value)
+    const el = document.getElementById('submitBtn')
+    if (el) {
+      setTimeout(() => {
+          el.style.display = 'none'
+      }, 200)
+    }
+    infoSubmitted.value = true
   }
 </script>
 
 <template>
   <div>
-    <form @submit.prevent="handleSubmit">
+    <span v-if="infoSubmitted">Info is still editable</span>
+    <form name="infoForm" @submit.prevent="handleSubmit">
       <label for="name">Name:</label>
-      <input type="text" id="name" v-model="formData.name" />
+      <input class="infoField" type="text" id="name" name="name" v-model="formData.name" />
 
       <label for="email">Email:</label>
-      <input type="email" id="email" v-model="formData.email" />
+      <input class="infoField" type="email" id="email" name="email" v-model="formData.email" />
 
       <label for="phone">Phone:</label>
-      <input type="tel" id="phone" v-model="formData.phone" />
+      <input class="infoField" type="tel" id="phone" name="phone" v-model="formData.phone" />
 
-      <button type="submit">Submit</button>
+      <button type="submit" id="submitBtn">Submit</button>
     </form>
   </div>
 </template>

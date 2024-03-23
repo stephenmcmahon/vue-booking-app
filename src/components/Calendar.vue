@@ -8,14 +8,13 @@
     date.value = value
     emits('dateSelected', date)
   }
-  const startTime = ref({ hours: 9, minutes: 0 })
 </script>
 
 <template>
   <DatePicker 
     :model-value="date"
     @update:model-value="setDate"
-    :start-time="startTime"
+    :start-time="{ hours: 9, minutes: 0 }"
     :min-time="{ hours: 9, minutes: 0 }"
     :max-time="{ hours: 17, minutes: 0 }"
     minutes-increment="15"
