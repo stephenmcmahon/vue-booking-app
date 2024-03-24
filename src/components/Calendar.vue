@@ -1,5 +1,5 @@
 <script setup>
-  import { ref, defineEmits } from 'vue'
+  import { ref } from 'vue'
   const date = ref()
 
   const emits = defineEmits(['dateSelected'])

@@ -1,5 +1,5 @@
 <script setup>
-  import { ref, defineEmits } from 'vue'
+  import { ref } from 'vue'
   const infoSubmitted = ref(false)
   const formData = ref({ 
     name: '', 
