@@ -57,6 +57,30 @@
   }
 
   const handleNoMessage = ref(true)
+
+  const handleBookMeeting = async () => {
+    try {
+      const requestData = {
+        infoData: infoData.value,
+        dateData: dateData.value,
+        messageData: handleNoMessage.value ? null : messageData.value
+      }
+      const response = await fetch('/book-meeting', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(requestData)
+      })
+      if (response.ok) {
+        console.log('Meeting booked successfully!')
+      } else {
+        console.error('Failed to book meeting:', response.statusText)
+      }
+    } catch (error) {
+      console.error('Error occurred while booking meeting:', error)
+    }
+  }
 </script>
 
 <template>
@@ -72,14 +96,20 @@
     <button id="confirmBtn" @click="handleConfirm">Confirm Info and Date</button>
   </div>
   <div v-if="infoConfirmed">
-    <button id="noMessageBtn" @click="handleNoMessage = !handleNoMessage">Toggle Message Box</button>
+    <button id="noMessageBtn" @click="handleNoMessage = !handleNoMessage">
+      <span v-if="handleNoMessage">Book without a message</span>
+      <span v-else>Send a message</span>
+    </button>
     <div v-if="handleNoMessage">
       <Message @messageSubmitted="handleMessageSubmitted" />
-      <p v-if="messageSent">{{ messageData.value }}</p>
+      <p v-if="messageSent">Message: {{ messageData.value }}</p>
     </div>
     <div v-else>
       <p>Book Meeting Without Message</p>
     </div>
+  </div>
+  <div v-if="infoConfirmed">
+    <button id="bookBtn" @click="handleBookMeeting">Book Meeting</button>
   </div>
 </template>
 

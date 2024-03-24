@@ -14,6 +14,7 @@
   <DatePicker 
     :model-value="date"
     @update:model-value="setDate"
+    time-picker-inline 
     :start-time="{ hours: 9, minutes: 0 }"
     :min-time="{ hours: 9, minutes: 0 }"
     :max-time="{ hours: 17, minutes: 0 }"
