@@ -84,39 +84,48 @@
 </script>
 
 <template>
-  <Info @formSubmitted="handleFormSubmitted" id="infoSection" />
-  <div v-if="infoSubmitted">
-    <Calendar @dateSelected="handleDateSubmitted" id="dateSection" />
-    <p>Name: {{ infoData.name }}</p>
-    <p>Email: {{ infoData.email }}</p>
-    <p>Phone: {{ infoData.phone }}</p>
-  </div>
-  <div v-if="dateSubmitted">
-    <p>Date Selected: {{ dateData.value }}</p>
-    <button id="confirmBtn" @click="handleConfirm">Confirm Info and Date</button>
-  </div>
-  <div v-if="infoConfirmed">
-    <button id="noMessageBtn" @click="handleNoMessage = !handleNoMessage">
-      <span v-if="handleNoMessage">Book without a message</span>
-      <span v-else>Send a message</span>
-    </button>
-    <div v-if="handleNoMessage">
-      <Message @messageSubmitted="handleMessageSubmitted" />
-      <p v-if="messageSent">Message: {{ messageData.value }}</p>
+  <div id="wrap">
+    <Info @formSubmitted="handleFormSubmitted" id="infoSection" />
+    <div v-if="infoSubmitted">
+      <Calendar @dateSelected="handleDateSubmitted" id="dateSection" />
+      <p>Name: {{ infoData.name }}</p>
+      <p>Email: {{ infoData.email }}</p>
+      <p>Phone: {{ infoData.phone }}</p>
     </div>
-    <div v-else>
-      <p>Book Meeting Without Message</p>
+    <div v-if="dateSubmitted">
+      <p>Date Selected: {{ dateData.value }}</p>
+      <button id="confirmBtn" @click="handleConfirm">Confirm Info and Date</button>
     </div>
-  </div>
-  <div v-if="infoConfirmed">
-    <button id="bookBtn" @click="handleBookMeeting">Book Meeting</button>
+    <div v-if="infoConfirmed">
+      <button id="noMessageBtn" @click="handleNoMessage = !handleNoMessage">
+        <span v-if="handleNoMessage">Book without a message</span>
+        <span v-else>Send a message</span>
+      </button>
+      <div v-if="handleNoMessage">
+        <Message @messageSubmitted="handleMessageSubmitted" />
+        <p v-if="messageSent">Message: {{ messageData.value }}</p>
+      </div>
+      <div v-else>
+        <p>Book Meeting Without Message</p>
+      </div>
+    </div>
+    <div v-if="infoConfirmed">
+      <button id="bookBtn" @click="handleBookMeeting">Book Meeting</button>
+    </div>
   </div>
 </template>
 
 <style scoped lang="scss">
-  div {
+  #wrap {
     width: 600px;
-    max-width: 600px;
-    margin: auto;
+    min-width: 600px;
+    margin: 25px auto 0 auto;
+    padding: 15px;
+    background-color: var(--color-border);
+    border-radius: 8px;
+    @media only screen and (max-width: 600px) {
+      width: 95%;
+      min-width: 95%;
+    }
   }
 </style>
