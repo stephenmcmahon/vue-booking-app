@@ -55,6 +55,9 @@
     @media only screen and (max-width: 600px) {
       padding: 0;
     }
+    span {
+      color: var(--vt-c-text-dark-2);
+    }
     form {
       label {
         font-size: 12px;
@@ -70,6 +73,9 @@
         height: 40px;
         margin: 3px 0 25px 0;
         padding: 0 10px;
+      }
+      button {
+        background-color: #04AA6D;
       }
     }
   }

@@ -4,6 +4,8 @@
   import Message from './components/Message.vue'
   import { ref } from 'vue'
 
+  const infoEditable = ref(true)
+  const datePicker = ref(true)
   const infoSubmitted = ref(false)
   const dateSubmitted = ref(false)
   const infoConfirmed = ref(false)
@@ -39,16 +41,22 @@
     if (el) {
       setTimeout(() => {
           el.style.display = 'none'
-      }, 200)
+      }, 0)
     }
-    const el2 = document.getElementById('infoSection')
-    const el3 = document.getElementById('dateSection')
-    if (el2 && el3) {
+    infoEditable.value = false
+    datePicker.value = false
+  }
+
+  const backToInfo = () => {
+    infoConfirmed.value = false
+    const el = document.getElementById('confirmBtn')
+    if (el) {
       setTimeout(() => {
-          el2.parentNode.removeChild(el2)
-          el3.parentNode.removeChild(el3)
-      }, 200)
+          el.style.display = 'block'
+      }, 0)
     }
+    infoEditable.value = true
+    datePicker.value = true
   }
 
   const handleMessageSubmitted = (data) => {
@@ -85,19 +93,22 @@
 
 <template>
   <div id="wrap">
-    <Info @formSubmitted="handleFormSubmitted" id="infoSection" />
-    <div v-if="infoSubmitted">
-      <Calendar @dateSelected="handleDateSubmitted" id="dateSection" />
+    <Info @formSubmitted="handleFormSubmitted" v-if="infoEditable" />
+    <div class="infoDetails" v-if="infoSubmitted">
+      <Calendar @dateSelected="handleDateSubmitted" v-if="datePicker" />
       <p>Name: {{ infoData.name }}</p>
       <p>Email: {{ infoData.email }}</p>
       <p>Phone: {{ infoData.phone }}</p>
     </div>
-    <div v-if="dateSubmitted">
+    <div class="infoDetails" v-if="dateSubmitted">
       <p>Date Selected: {{ dateData.value }}</p>
       <button id="confirmBtn" @click="handleConfirm">Confirm Info and Date</button>
     </div>
-    <div v-if="infoConfirmed">
-      <button id="noMessageBtn" @click="handleNoMessage = !handleNoMessage">
+    <div id="backBtn" v-if="infoConfirmed">
+      <button @click="backToInfo">Back</button>
+    </div>
+    <div id="messageDetails" v-if="infoConfirmed">
+      <button @click="handleNoMessage = !handleNoMessage">
         <span v-if="handleNoMessage">Book without a message</span>
         <span v-else>Send a message</span>
       </button>
@@ -109,8 +120,8 @@
         <p>Book Meeting Without Message</p>
       </div>
     </div>
-    <div v-if="infoConfirmed">
-      <button id="bookBtn" @click="handleBookMeeting">Book Meeting</button>
+    <div id="bookBtn" v-if="infoConfirmed">
+      <button @click="handleBookMeeting">Book Meeting</button>
     </div>
   </div>
 </template>
@@ -120,12 +131,38 @@
     width: 600px;
     min-width: 600px;
     margin: 25px auto 0 auto;
-    padding: 15px;
-    background-color: var(--color-border);
+    padding: 50px;
+    background-color: var(--vt-c-indigo);
     border-radius: 8px;
     @media only screen and (max-width: 600px) {
       width: 95%;
       min-width: 95%;
+    }
+    .infoDetails {
+      #confirmBtn{ 
+        background-color: #04AA6D;
+      }
+    }
+    #backBtn {
+      position: absolute;
+      top: 10px;
+      button {
+        background-color: #aa0404;
+        padding: 5px 15px;
+      }
+    }
+    #messageDetails {
+      button {
+        background-color: var(--vt-c-text-dark-2);
+        padding: 10px;
+        width: 200px;
+        font-size: 12px;
+      }
+    }
+    #bookBtn {
+      button {
+        background-color: #044caa;
+      }
     }
   }
 </style>
