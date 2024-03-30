@@ -18,6 +18,9 @@ npm install
 ```sh
 npm install -D less
 ```
+```sh
+npm install @vuepic/vue-datepicker
+```
 
 ### Compile and Hot-Reload for Development
 
