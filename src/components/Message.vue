@@ -19,9 +19,11 @@
 <style scoped lang="scss">
   div {
     form {
+      text-align: center;
       textarea {
         width: 100%;
         height: 75px;
+        padding: 5px;
       }
       button {
         background-color: #04AA6D;

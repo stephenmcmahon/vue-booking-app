@@ -32,8 +32,7 @@
   #datePicker {
     background-color: var(--vt-c-text-dark-2);
     padding: 10px 100px;
-  }
-  input {
-    border: 1px solid #04AA6D;
+    margin-bottom: 25px;
+    border: 3px solid #04AA6D;
   }
 </style>

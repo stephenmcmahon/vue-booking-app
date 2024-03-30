@@ -96,12 +96,17 @@
     <Info @formSubmitted="handleFormSubmitted" v-if="infoEditable" />
     <div class="infoDetails" v-if="infoSubmitted">
       <Calendar @dateSelected="handleDateSubmitted" v-if="datePicker" />
-      <p>Name: {{ infoData.name }}</p>
-      <p>Email: {{ infoData.email }}</p>
-      <p>Phone: {{ infoData.phone }}</p>
+      <h2>Info Submitted:</h2>
+      <span>Name:</span>
+      <p>{{ infoData.name }}</p>
+      <span>Email:</span>
+      <p>{{ infoData.email }}</p>
+      <span>Phone:</span>
+      <p>{{ infoData.phone }}</p>
     </div>
     <div class="infoDetails" v-if="dateSubmitted">
-      <p>Date Selected: {{ dateData.value }}</p>
+      <span>Date Selected:</span>
+      <p>{{ dateData.value }}</p>
       <button id="confirmBtn" @click="handleConfirm">Confirm Info and Date</button>
     </div>
     <div id="backBtn" v-if="infoConfirmed">
@@ -114,7 +119,10 @@
       </button>
       <div v-if="handleNoMessage">
         <Message @messageSubmitted="handleMessageSubmitted" />
-        <p v-if="messageSent">Message: {{ messageData.value }}</p>
+        <div v-if="messageSent">
+          <span>Message:</span>
+          <p>{{ messageData.value }}</p>
+        </div>
       </div>
       <div v-else>
         <p>Book Meeting Without Message</p>
@@ -139,7 +147,17 @@
       min-width: 95%;
     }
     .infoDetails {
+      text-align: center;
+      span {
+        font-size: 12px;
+        font-weight: bold;
+      }
+      p {
+        line-height: 12px;
+        margin-bottom: 15px;
+      }
       #confirmBtn{ 
+        margin-top: 25px;
         background-color: #04AA6D;
       }
     }
@@ -152,14 +170,26 @@
       }
     }
     #messageDetails {
+      text-align: center;
+      span {
+        font-size: 12px;
+        font-weight: bold;
+      }
+      p {
+        line-height: 12px;
+        margin-bottom: 15px;
+      }
       button {
         background-color: var(--vt-c-text-dark-2);
-        padding: 10px;
+        padding: 5px 0;
+        margin: 10px 0;
         width: 200px;
         font-size: 12px;
       }
     }
     #bookBtn {
+      text-align: center;
+      margin-top: 50px;
       button {
         background-color: #044caa;
       }
