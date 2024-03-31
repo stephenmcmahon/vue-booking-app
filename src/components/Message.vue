@@ -10,7 +10,7 @@
 <template>
   <div>
     <form @submit.prevent="handleSubmit">
-      <textarea class="infoField" id="message" name="message" v-model="message" placeholder="Enter Message Here..."></textarea>
+      <textarea class="infoField" id="message" name="message" v-model="message" placeholder="Enter Message Here..." maxlength ="1000"></textarea>
       <button type="submit">Submit Message</button>
     </form>
   </div>
@@ -22,8 +22,9 @@
       text-align: center;
       textarea {
         width: 100%;
-        height: 75px;
+        height: 125px;
         padding: 5px;
+        resize: none;
       }
       button {
         background-color: #04AA6D;

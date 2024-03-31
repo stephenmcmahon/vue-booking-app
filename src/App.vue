@@ -57,6 +57,7 @@
     }
     infoEditable.value = true
     datePicker.value = true
+    dateSubmitted.value = false
   }
 
   const handleMessageSubmitted = (data) => {
@@ -176,7 +177,7 @@
         font-weight: bold;
       }
       p {
-        line-height: 12px;
+        line-height: 20px;
         margin-bottom: 15px;
       }
       button {
@@ -191,7 +192,8 @@
       text-align: center;
       margin-top: 50px;
       button {
-        background-color: #044caa;
+        background-color: #006eff;
+        border: 2px solid #04AA6D;
       }
     }
   }
